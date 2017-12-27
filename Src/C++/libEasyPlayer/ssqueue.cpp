@@ -259,7 +259,7 @@ int		SSQ_Clear(SS_QUEUE_OBJ_T *pObj)
 	return 0;
 }
 
-int	SSQ_AddFrameInfo(SS_QUEUE_OBJ_T *pObj, unsigned int _pos, MEDIA_FRAME_INFO *frameinfo)
+int	SSQ_AddFrameInfo(SS_QUEUE_OBJ_T *pObj, unsigned int _pos, EASY_FRAME_INFO *frameinfo)
 {
 	if (NULL == pObj)					return -1;
 	if (NULL == pObj->pQueHeader)		return -1;
@@ -298,7 +298,7 @@ int	SSQ_AddFrameInfo(SS_QUEUE_OBJ_T *pObj, unsigned int _pos, MEDIA_FRAME_INFO *
 	return 0;
 }
 
-int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf)
+int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf)
 {
 	int ret = 0;
 	SS_BUF_T	bufNode;
@@ -361,7 +361,7 @@ int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int medi
 	pObj->pQueHeader->isfull = 0x00;
 
 	memset(&bufNode, 0x00, sizeof(SS_BUF_T));
-	memcpy(&bufNode.frameinfo, frameinfo, sizeof(MEDIA_FRAME_INFO));
+	memcpy(&bufNode.frameinfo, frameinfo, sizeof(EASY_FRAME_INFO));
 	bufNode.channelid = channelid;//++m_FrameTally;
 	bufNode.mediatype = mediatype;
 	bufNode.flag	=	BUF_QUE_FLAG;
@@ -542,7 +542,7 @@ int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int medi
 
 	return ret;
 }
-int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf)
+int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf)
 {
 	int ret = 0;
 	unsigned int remain = 0;
@@ -632,7 +632,7 @@ int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *me
 		if (NULL != channelid)		*channelid = pNode->channelid;
 
 
-		memcpy(frameinfo, &pNode->frameinfo, sizeof(MEDIA_FRAME_INFO));
+		memcpy(frameinfo, &pNode->frameinfo, sizeof(EASY_FRAME_INFO));
 		if ( (pObj->pQueHeader->readpos + pNode->frameinfo.length+sizeof(SS_BUF_T)) <= pObj->pQueHeader->bufsize)
 		{
 			//从头到尾读
@@ -826,7 +826,7 @@ int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *me
 			memcpy(pp+remain, pObj->pQueData, sizeof(SS_BUF_T)-remain);
 			//memset(pObj->pQueData, 0x00, sizeof(SS_BUF_T)-remain);	//clear
 
-			memcpy(frameinfo, &bufnode.frameinfo, sizeof(MEDIA_FRAME_INFO));
+			memcpy(frameinfo, &bufnode.frameinfo, sizeof(EASY_FRAME_INFO));
 			if (NULL != channelid)		*channelid = bufnode.channelid;
 
 			//if (bufnode.id<1)
@@ -878,7 +878,7 @@ int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *me
 
 //===========================================
 //根据位置获取对应的帧数据
-int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned int clearflag, unsigned int *channelid, unsigned int *mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf)
+int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned int clearflag, unsigned int *channelid, unsigned int *mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf)
 {
 	int ret = 0;
 	unsigned int remain = 0;
@@ -946,7 +946,7 @@ int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned
 		if (NULL != channelid)		*channelid = pNode->channelid;
 
 
-		memcpy(frameinfo, &pNode->frameinfo, sizeof(MEDIA_FRAME_INFO));
+		memcpy(frameinfo, &pNode->frameinfo, sizeof(EASY_FRAME_INFO));
 		if ( (*pOffset + pNode->frameinfo.length+sizeof(SS_BUF_T)) <= pObj->pQueHeader->bufsize)
 		{
 			//从头到尾读
@@ -1045,7 +1045,7 @@ int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned
 			SSQ_TRACE("[SSQ_GetDataByPosition]2 read: %d\n", sizeof(SS_BUF_T)-remain);
 			memcpy(pp+remain, pObj->pQueData, sizeof(SS_BUF_T)-remain);
 
-			memcpy(frameinfo, &bufnode.frameinfo, sizeof(MEDIA_FRAME_INFO));
+			memcpy(frameinfo, &bufnode.frameinfo, sizeof(EASY_FRAME_INFO));
 			if (NULL != channelid)		*channelid = bufnode.channelid;
 
 			if (bufnode.flag	!= BUF_QUE_FLAG)

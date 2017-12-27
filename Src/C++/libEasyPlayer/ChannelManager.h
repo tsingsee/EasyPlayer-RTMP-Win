@@ -93,7 +93,7 @@ typedef struct __THREAD_OBJ
 
 typedef struct _YUV_FRAME_INFO			//YUV信息
 {
-	MEDIA_FRAME_INFO	frameinfo;
+	EASY_FRAME_INFO	frameinfo;
 	char	*pYuvBuf;
 	int		Yuvsize;
 }YUV_FRAME_INFO;
@@ -105,7 +105,7 @@ typedef struct tagRECORD_FRAME_INFO
 	{
 
 		//音视频参数
-		memset(&mediaInfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+		memset(&mediaInfo, 0x00, sizeof(EASY_FRAME_INFO));
 	}
 	tagRECORD_FRAME_INFO& operator=(const tagRECORD_FRAME_INFO& src)
 	{
@@ -115,7 +115,7 @@ typedef struct tagRECORD_FRAME_INFO
 		bIsVideo	=	src.bIsVideo;
 		nID			=	src.nID;
 		//视频参数
-		memcpy(&mediaInfo, &src.mediaInfo, sizeof(MEDIA_FRAME_INFO) );
+		memcpy(&mediaInfo, &src.mediaInfo, sizeof(EASY_FRAME_INFO) );
 	}
 	//结构数据信息参数
 	unsigned char* pDataBuffer;
@@ -125,7 +125,7 @@ typedef struct tagRECORD_FRAME_INFO
 	bool bKeyFrame;//标识是否为关键帧(对视频有效)
 	int nID;//文件ID
 	// 音视频信息
-	MEDIA_FRAME_INFO mediaInfo;
+	EASY_FRAME_INFO mediaInfo;
 }RECORD_FRAME_INFO;
 
 typedef std::queue<RECORD_FRAME_INFO*> QueueFrame;

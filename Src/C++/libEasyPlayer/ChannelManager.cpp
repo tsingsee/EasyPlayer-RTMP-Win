@@ -499,7 +499,7 @@ void CChannelManager::ClosePlayThread(PLAY_THREAD_OBJ	*_pPlayThread)
 	for (int i=0; i<MAX_YUV_FRAME_NUM; i++)
 	{
 		__DELETE_ARRAY(_pPlayThread->yuvFrame[i].pYuvBuf);
-		memset(&_pPlayThread->yuvFrame[i].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+		memset(&_pPlayThread->yuvFrame[i].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 		_pPlayThread->yuvFrame[i].Yuvsize = 0;
 	}
 
@@ -624,7 +624,7 @@ void ParseDecoder2Render(int *_decoder, int _width, int _height, int renderForma
 	if (NULL != yuvsize)	*yuvsize  = nYUVSize;
 }
 
-DECODER_OBJ	*GetDecoder(PLAY_THREAD_OBJ	*_pPlayThread, unsigned int mediaType, MEDIA_FRAME_INFO *_frameinfo)
+DECODER_OBJ	*GetDecoder(PLAY_THREAD_OBJ	*_pPlayThread, unsigned int mediaType, EASY_FRAME_INFO *_frameinfo)
 {
 	if (NULL == _pPlayThread || NULL==_frameinfo)									return NULL;
 
@@ -844,12 +844,12 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 	{
 		for (int i=0; i<MAX_YUV_FRAME_NUM; i++)
 		{
-			memset(&pThread->yuvFrame[i].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+			memset(&pThread->yuvFrame[i].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 		}
 	}
 	unsigned int channelid = 0;
 	unsigned int mediatype = 0;
-	MEDIA_FRAME_INFO	frameinfo;
+	EASY_FRAME_INFO	frameinfo;
 	int buf_size = 1024*1024;
 	//int buf_size = 1920*1080*2;
 
@@ -862,7 +862,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 	memset(pbuf, 0x00, buf_size);
 
 	pThread->decodeYuvIdx	=	0;
-	memset(&frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+	memset(&frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 
 	//#define AVCODEC_MAX_AUDIO_FRAME_SIZE	(192000)
 #define AVCODEC_MAX_AUDIO_FRAME_SIZE	(64000)
@@ -933,7 +933,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 				pThread->findKeyframe = 0x01;
 				for (int i=0; i<MAX_YUV_FRAME_NUM; i++)
 				{
-					memset(&pThread->yuvFrame[i].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+					memset(&pThread->yuvFrame[i].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 				}
 				LeaveCriticalSection(&pThread->crit);
 			}
@@ -1038,7 +1038,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 // 					pFrameInfo->bIsVideo=TRUE;
 // 					pFrameInfo->bKeyFrame = (frameinfo.type==EASY_SDK_VIDEO_FRAME_I)?true:false;
 // 					pFrameInfo->nID=channelid;	
-// 					memcpy(&pFrameInfo->mediaInfo, &frameinfo, sizeof(MEDIA_FRAME_INFO) );
+// 					memcpy(&pFrameInfo->mediaInfo, &frameinfo, sizeof(EASY_FRAME_INFO) );
 // 
 // 					pFrameInfo->nTimestamp=frameinfo.timestamp_sec*1000+frameinfo.timestamp_usec/1000;
 // 					pThread->frameRecQueue.push(pFrameInfo);
@@ -1046,7 +1046,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 
 					if (NULL != pThread->pRecAVQueue)
 					{
-						SSQ_AddData(pThread->pRecAVQueue, channelid, MEDIA_TYPE_VIDEO, (MEDIA_FRAME_INFO*)&frameinfo, pbuf);
+						SSQ_AddData(pThread->pRecAVQueue, channelid, MEDIA_TYPE_VIDEO, (EASY_FRAME_INFO*)&frameinfo, pbuf);
 					}
 				}
 			}
@@ -1154,7 +1154,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 				}
 				else
 				{
-					memcpy(&pThread->yuvFrame[pThread->decodeYuvIdx].frameinfo, &frameinfo, sizeof(MEDIA_FRAME_INFO));
+					memcpy(&pThread->yuvFrame[pThread->decodeYuvIdx].frameinfo, &frameinfo, sizeof(EASY_FRAME_INFO));
 
 					pThread->decodeYuvIdx ++;
 					if (pThread->decodeYuvIdx >= MAX_YUV_FRAME_NUM)		pThread->decodeYuvIdx = 0;
@@ -1253,7 +1253,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 // 						pFrameInfo->nBufSize=frameinfo.length;
 // 						pFrameInfo->bIsVideo=FALSE;
 // 						pFrameInfo->nID=channelid;	
-// 						memcpy(&pFrameInfo->mediaInfo, &frameinfo, sizeof(MEDIA_FRAME_INFO) );
+// 						memcpy(&pFrameInfo->mediaInfo, &frameinfo, sizeof(EASY_FRAME_INFO) );
 // 
 // 						pFrameInfo->nTimestamp=frameinfo.timestamp_sec*1000+frameinfo.timestamp_usec/1000;
 // 						pThread->frameRecQueue.push(pFrameInfo);
@@ -1261,7 +1261,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 										
 						if (NULL != pThread->pRecAVQueue)
 						{
-							SSQ_AddData(pThread->pRecAVQueue, channelid, MEDIA_TYPE_AUDIO, (MEDIA_FRAME_INFO*)&frameinfo, pbuf);
+							SSQ_AddData(pThread->pRecAVQueue, channelid, MEDIA_TYPE_AUDIO, (EASY_FRAME_INFO*)&frameinfo, pbuf);
 						}
 					}
 
@@ -1555,7 +1555,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpRecordThread( LPVOID _pParam )
 	unsigned char *audio_buf = new unsigned char[audbuf_len+1];
 	memset(audio_buf, 0x00, audbuf_len);
 
-	MEDIA_FRAME_INFO frameinfo;
+	EASY_FRAME_INFO frameinfo;
 	unsigned int channelid = 0;
 	unsigned int mediatype = 0;
 
@@ -1742,8 +1742,8 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 
 	int iLastDisplayYuvIdx = -1;
 
-	MEDIA_FRAME_INFO	lastFrameInfo;
-	memset(&lastFrameInfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+	EASY_FRAME_INFO	lastFrameInfo;
+	memset(&lastFrameInfo, 0x00, sizeof(EASY_FRAME_INFO));
 
 //#ifdef _DEBUG
 #if 1
@@ -1794,7 +1794,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 				/*
 				else if (pThread->yuvFrame[iYuvIdx].frameinfo.rtptimestamp == rtpTimestamp)
 				{
-					memset(&pThread->yuvFrame[iYuvIdx].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+					memset(&pThread->yuvFrame[iYuvIdx].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 					iDispalyYuvIdx = iYuvIdx;
 					break;
 				}
@@ -1821,7 +1821,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 		{
 			pThread->rtpTimestamp = pThread->yuvFrame[iDispalyYuvIdx].frameinfo.timestamp_sec*1000+pThread->yuvFrame[iDispalyYuvIdx].frameinfo.timestamp_usec/1000;
 
-			memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+			memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 			continue;
 		}
 
@@ -1953,7 +1953,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 				deviceLostTime = (unsigned int)time(NULL);
 				//如果d3d 初始化失败,则清空帧头信息,以便解码线程继续解码下一帧
 				pThread->rtpTimestamp = pThread->yuvFrame[iDispalyYuvIdx].frameinfo.timestamp_sec*1000+pThread->yuvFrame[iDispalyYuvIdx].frameinfo.timestamp_usec/1000;
-				memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+				memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 				_VS_BEGIN_TIME_PERIOD(1);
 				__VS_Delay(1);
 				_VS_END_TIME_PERIOD(1);
@@ -2071,8 +2071,8 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 
 		int ret = 0;
 
-		memset(&lastFrameInfo, 0x00, sizeof(MEDIA_FRAME_INFO));
-		memcpy(&lastFrameInfo, &pThread->yuvFrame[iDispalyYuvIdx].frameinfo, sizeof(MEDIA_FRAME_INFO));
+		memset(&lastFrameInfo, 0x00, sizeof(EASY_FRAME_INFO));
+		memcpy(&lastFrameInfo, &pThread->yuvFrame[iDispalyYuvIdx].frameinfo, sizeof(EASY_FRAME_INFO));
 
 		if (nQueueFrame > iCache * 2)	iDropFrame ++;
 		else							iDropFrame = 0;
@@ -2187,7 +2187,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 			_TRACE("丢帧...%d\n", iDropFrame);
 		}
 		
-		memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+		memset(&pThread->yuvFrame[iDispalyYuvIdx].frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 
 		if (iInitTimestamp == 0x00)
 		{
@@ -2321,85 +2321,6 @@ int __RTMPSourceCallBack( int _channelId, void *_channelPtr, int _frameType, cha
 	return 0;
 }
 
-//FILE* fVideo = NULL;
-//FILE* fAudio = NULL;
-//bool fSaveFile = false;		//true : save file     false ： don't save
-//int __RTMPSourceCallBack(int _channelId, void* _channelPtr, int _frameType, char* _pBuf, EASY_FRAME_INFO* _frameInfo)
-//{
-//	if (_frameType == EASY_SDK_VIDEO_FRAME_FLAG)//回调视频数据，包含00 00 00 01头
-//	{
-//		if (_frameInfo->codec == EASY_SDK_VIDEO_CODEC_H264)
-//		{
-//			/*
-//			每一个I关键帧都是SPS+PPS+IDR的组合
-//			|---------------------|----------------|-------------------------------------|
-//			|                     |                |                                     |
-//			0-----------------reserved1--------reserved2-------------------------------length
-//			*/
-//			if (_frameInfo->type == EASY_SDK_VIDEO_FRAME_I)
-//			{
-//				_TRACE("Get I H264(%d * %d) IDR Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
-//			}
-//			else if (_frameInfo->type == EASY_SDK_VIDEO_FRAME_P)
-//			{
-//				_TRACE("Get P H264(%d * %d) Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
-//			}
-//
-//			if (fSaveFile)
-//			{
-//				if (fVideo == NULL)
-//				{
-//					char filename[100] = { 0 };
-//					sprintf(filename, "./video.h264");
-//					fVideo = ::fopen(filename, "wb");
-//				}
-//
-//				::fwrite(_pBuf, 1, _frameInfo->length, fVideo);
-//			}
-//		}
-//		else if (_frameInfo->codec == EASY_SDK_VIDEO_CODEC_H265)
-//		{
-//			printf("Get H265(%d * %d) Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
-//		}
-//	}
-//	else if (_frameType == EASY_SDK_AUDIO_FRAME_FLAG)//回调音频数据
-//	{
-//		if (_frameInfo->codec == EASY_SDK_AUDIO_CODEC_AAC)
-//		{
-//			if (fSaveFile)
-//			{
-//				if (fAudio == NULL)
-//				{
-//					char filename[100] = { 0 };
-//					sprintf(filename, "./audio.aac");
-//					fAudio = ::fopen(filename, "wb");
-//				}
-//			}
-//			_TRACE("Get AAC Len:%d \ttimestamp:%u.%u\n", _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
-//		}
-//
-//		if (fSaveFile)
-//			::fwrite(_pBuf, 1, _frameInfo->length, fAudio);
-//	}
-//	else if (_frameType == EASY_SDK_EVENT_FRAME_FLAG)//回调连接状态事件
-//	{
-//
-//	}
-//	else if (_frameType == EASY_SDK_MEDIA_INFO_FLAG)//回调出媒体信息
-//	{
-//		if (_pBuf != NULL)
-//		{
-//			EASY_MEDIA_INFO_T mediainfo;
-//			memset(&mediainfo, 0x00, sizeof(EASY_MEDIA_INFO_T));
-//			memcpy(&mediainfo, _pBuf, sizeof(EASY_MEDIA_INFO_T));
-//			_TRACE("RTSP DESCRIBE Get Media Info: video:%u fps:%u audio:%u channel:%u sampleRate:%u \n",
-//				mediainfo.u32VideoCodec, mediainfo.u32VideoFps, mediainfo.u32AudioCodec, mediainfo.u32AudioChannel, mediainfo.u32AudioSamplerate);
-//		}
-//	}
-//	return 0;
-//}
-//
-
 int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAME_INFO *frameinfo)
 {
 	if (NULL == pRealtimePlayThread)			return 0;
@@ -2409,6 +2330,9 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 	{
 		pMediaCallback(_chid, (int*)pRealtimePlayThread[_chid].pUserPtr, mediatype, pbuf, frameinfo);
 	}
+	EASY_FRAME_INFO media_frameInfo ;
+	if(frameinfo )
+		memcpy(&media_frameInfo, frameinfo, sizeof(EASY_FRAME_INFO));
 
 	if (mediatype == EASY_SDK_VIDEO_FRAME_FLAG)
 	{
@@ -2432,7 +2356,7 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 		}
 		if (NULL != pRealtimePlayThread[_chid].pAVQueue && m_bIFrameArrive)
 		{
-			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_VIDEO, (MEDIA_FRAME_INFO*)frameinfo, pbuf);
+			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_VIDEO, (EASY_FRAME_INFO*)&media_frameInfo, pbuf);
 		}
 	}
 	else if (mediatype == EASY_SDK_AUDIO_FRAME_FLAG)
@@ -2453,7 +2377,7 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 		}
 		if (NULL != pRealtimePlayThread[_chid].pAVQueue)
 		{
-			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_AUDIO, (MEDIA_FRAME_INFO*)frameinfo, pbuf);
+			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_AUDIO, (EASY_FRAME_INFO*)frameinfo, pbuf);
 		}
 	}
 // 	else if (mediatype == EASY_SDK_EVENT_FRAME_FLAG)
@@ -2462,18 +2386,18 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 // 		{
 // 			_TRACE("[ch%d]连接中...\n", _chid);
 // 
-// 			MEDIA_FRAME_INFO	frameinfo;
-// 			memset(&frameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+// 			EASY_FRAME_INFO	frameinfo;
+// 			memset(&frameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 // 			frameinfo.length = 1;
 // 			frameinfo.type   = 0xFF;
-// 			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (MEDIA_FRAME_INFO*)&frameinfo, "1");
+// 			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (EASY_FRAME_INFO*)&frameinfo, "1");
 // 		}
 // 		else if (NULL!=frameinfo && frameinfo->type==0xF1)
 // 		{
 // 			_TRACE("[ch%d]掉包[%.2f]...\n", _chid, frameinfo->losspacket);
 // 
 // 			frameinfo->length = 1;
-// 			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (MEDIA_FRAME_INFO*)frameinfo, "1");
+// 			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (EASY_FRAME_INFO*)frameinfo, "1");
 // 		}
 // 	}
 	else if (mediatype == EASY_SDK_EVENT_FRAME_FLAG)//回调连接状态事件
@@ -2485,11 +2409,11 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 		{
 			sprintf(sErrorString, "Connect success : %s ...\n", fRTSPURL);
 
-			MEDIA_FRAME_INFO	tmpFrameinfo;
-			memset(&tmpFrameinfo, 0x00, sizeof(MEDIA_FRAME_INFO));
+			EASY_FRAME_INFO	tmpFrameinfo;
+			memset(&tmpFrameinfo, 0x00, sizeof(EASY_FRAME_INFO));
 			tmpFrameinfo.length = 1;
 			tmpFrameinfo.type   = 0xFF;
-			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (MEDIA_FRAME_INFO*)&tmpFrameinfo, sErrorString);
+			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (EASY_FRAME_INFO*)&tmpFrameinfo, sErrorString);
 			if (pMediaCallback)
 				pMediaCallback(_chid, (int*)pRealtimePlayThread[_chid].pUserPtr, mediatype, sErrorString,  (EASY_FRAME_INFO*)&tmpFrameinfo);
 		}
@@ -2498,7 +2422,7 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 			sprintf(sErrorString, "Error:	 %s：	[ch%d]掉包[%.2f]...\n",  fRTSPURL, _chid, frameinfo->losspacket);
 
 			frameinfo->length = 1;
-			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (MEDIA_FRAME_INFO*)frameinfo, sErrorString);
+			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (EASY_FRAME_INFO*)frameinfo, sErrorString);
 			if (pMediaCallback)
 				pMediaCallback(_chid, (int*)pRealtimePlayThread[_chid].pUserPtr, mediatype, sErrorString, frameinfo);
 		}
@@ -2507,7 +2431,7 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 		else if (NULL != frameinfo && frameinfo->codec != 0)
 		{
 			sprintf(sErrorString, "Error:	  %s： Connect failed：%d  ...\n", fRTSPURL, frameinfo->codec);
-			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (MEDIA_FRAME_INFO*)frameinfo, sErrorString);
+			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_EVENT, (EASY_FRAME_INFO*)frameinfo, sErrorString);
 			if (pMediaCallback)
 				pMediaCallback(_chid, (int*)pRealtimePlayThread[_chid].pUserPtr, mediatype, sErrorString, frameinfo);
 		}

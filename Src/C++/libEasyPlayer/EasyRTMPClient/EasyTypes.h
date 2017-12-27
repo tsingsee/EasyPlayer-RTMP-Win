@@ -134,7 +134,7 @@ typedef struct __EASY_MEDIA_INFO_T
 }EASY_MEDIA_INFO_T;
 
 /* 帧信息 */
-typedef struct 
+typedef struct tagEASY_FRAME_INFO
 {
 	unsigned int	codec;				/* 音视频格式 */
 
@@ -157,5 +157,6 @@ typedef struct
 	float			bitrate;			/* 比特率 */
 	float			losspacket;			/* 丢包率 */
 }EASY_FRAME_INFO;
+
 
 #endif

@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 //#include "common.h"
+#include "EasyRTMPClient\EasyTypes.h"
+
 
 #define		LOCK_WAIT_TIMES		1000
 
@@ -32,29 +34,29 @@
 #define	MEDIA_TYPE_EVENT	0x04
 #endif
 
-typedef struct __MEDIA_FRAME_INFO
-{
-	unsigned int	codec;			/* 音视频格式 */
-	unsigned int	type;			/* 视频帧类型 */
-	unsigned char	fps;			/* 视频帧率 */
-	unsigned short	width;			/* 视频宽 */
-	unsigned short  height;			/* 视频高 */
-
-	unsigned int	reserved1;		/* 保留参数1 */
-	unsigned int	reserved2;		/* 保留参数2 */
-
-	unsigned int	sample_rate;	/* 音频采样率 */
-	unsigned int	channels;		/* 音频声道数 */
-	// 增加音频采样精度 [5/9/2016 SwordTwelve]
-	unsigned int	bits_per_sample;	/* 音频采样精度 */
-
-	unsigned int	length;			/* 音视频帧大小 */
-	unsigned int    timestamp_usec;	/* 时间戳,微妙 */
-	unsigned int	timestamp_sec;	/* 时间戳 秒 */
-	
-	float			bitrate;		/* 比特率 */
-	float			losspacket;		/* 丢包率 */
-}MEDIA_FRAME_INFO;
+// typedef struct __EASY_FRAME_INFO
+// {
+// 	unsigned int	codec;			/* 音视频格式 */
+// 	unsigned int	type;			/* 视频帧类型 */
+// 	unsigned char	fps;			/* 视频帧率 */
+// 	unsigned short	width;			/* 视频宽 */
+// 	unsigned short  height;			/* 视频高 */
+// 
+// 	unsigned int	reserved1;		/* 保留参数1 */
+// 	unsigned int	reserved2;		/* 保留参数2 */
+// 
+// 	unsigned int	sample_rate;	/* 音频采样率 */
+// 	unsigned int	channels;		/* 音频声道数 */
+// 	// 增加音频采样精度 [5/9/2016 SwordTwelve]
+// 	unsigned int	bits_per_sample;	/* 音频采样精度 */
+// 
+// 	unsigned int	length;			/* 音视频帧大小 */
+// 	unsigned int    timestamp_usec;	/* 时间戳,微妙 */
+// 	unsigned int	timestamp_sec;	/* 时间戳 秒 */
+// 
+// 	float			bitrate;		/* 比特率 */
+// 	float			losspacket;		/* 丢包率 */
+// }EASY_FRAME_INFO;
 
 typedef struct __SS_BUF_T
 {
@@ -62,7 +64,7 @@ typedef struct __SS_BUF_T
 	unsigned int		mediatype;
 #define BUF_QUE_FLAG	0x0FFFFFFF
 	unsigned int flag;
-	MEDIA_FRAME_INFO	frameinfo;
+	EASY_FRAME_INFO	frameinfo;
 	unsigned int timestamp;
 }SS_BUF_T;
 
@@ -130,10 +132,10 @@ extern "C"
 
 	int		SSQ_SetClearFlag(SS_QUEUE_OBJ_T *pObj, int _flag);
 	int		SSQ_Clear(SS_QUEUE_OBJ_T *pObj);
-	int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf);
-	int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf);
-	int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned int clearflag, unsigned int *channelid, unsigned int *mediatype, MEDIA_FRAME_INFO *frameinfo, char *pbuf);
-	int		SSQ_AddFrameInfo(SS_QUEUE_OBJ_T *pObj, unsigned int _pos, MEDIA_FRAME_INFO *frameinfo);
+	int		SSQ_AddData(SS_QUEUE_OBJ_T *pObj, unsigned int channelid, unsigned int mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf);
+	int		SSQ_GetData(SS_QUEUE_OBJ_T *pObj, unsigned int *channelid, unsigned int *mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf);
+	int		SSQ_GetDataByPosition(SS_QUEUE_OBJ_T *pObj, unsigned int position, unsigned int clearflag, unsigned int *channelid, unsigned int *mediatype, EASY_FRAME_INFO *frameinfo, char *pbuf);
+	int		SSQ_AddFrameInfo(SS_QUEUE_OBJ_T *pObj, unsigned int _pos, EASY_FRAME_INFO *frameinfo);
 
 
 
