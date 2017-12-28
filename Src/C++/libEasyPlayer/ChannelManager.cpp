@@ -1278,7 +1278,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 
 						memset(audio_buf, 0x00, audbuf_len);
 						int pcm_data_size = 0;
-						int ret = FFD_DecodeAudio(pDecoderObj->ffDecoder, (char*)pDecBuffer, nDecBufLen, (char *)audio_buf, &pcm_data_size);	//音频解码(支持g711(ulaw)和AAC)
+						int ret = FFD_DecodeAudio(pDecoderObj->ffDecoder, (char*)pDecBuffer+7, nDecBufLen-7, (char *)audio_buf, &pcm_data_size);	//音频解码(支持g711(ulaw)和AAC)
 						if (ret == 0)
 						{
 							//播放

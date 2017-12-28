@@ -14,7 +14,7 @@
     <ProjectGuid>{BC0300E0-E5D5-4A49-88B4-4E79DFF5F1CC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libEasyPlayer</RootNamespace>
-    <ProjectName>libEasyPlayer-RTSP</ProjectName>
+    <ProjectName>libEasyPlayer-RTMP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

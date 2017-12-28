@@ -14,7 +14,7 @@
     <ProjectGuid>{C36D2FB3-54B5-4C2C-8600-CD17F063992A}</ProjectGuid>
     <RootNamespace>EasyPlayerWebActiveX</RootNamespace>
     <Keyword>MFCActiveXProj</Keyword>
-    <ProjectName>EasyPlayer-RTSPWebActiveX</ProjectName>
+    <ProjectName>EasyPlayer-RTMPWebActiveX</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
