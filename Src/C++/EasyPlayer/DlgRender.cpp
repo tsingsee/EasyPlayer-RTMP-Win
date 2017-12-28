@@ -128,7 +128,7 @@ BOOL CDlgRender::OnCommand(WPARAM wParam, LPARAM lParam)
 			osd.rect.top = 100;
 			osd.rect.bottom = 800;
 			osd.shadowcolor = RGB(0,0,0);
-			char* ss =  "这是EasyPlayer-RTSP-Win播放器 \r\n的字幕叠加接口的效果！！\r\n以\"\\r\\n\"为换行结束符号\r\n注意：每行的长度不能超过128个字节\r\n总的OSD长度不能超过1024个字节";
+			char* ss =  "这是EasyPlayer-RTMP-Win播放器 \r\n的字幕叠加接口的效果！！\r\n以\"\\r\\n\"为换行结束符号\r\n注意：每行的长度不能超过128个字节\r\n总的OSD长度不能超过1024个字节";
 			strcpy(osd.stOSD ,ss);
 			EasyPlayer_ShowOSD(mChannelId, channelStatus.showOSD,  osd);
 #endif
