@@ -155,7 +155,7 @@ void CChannelManager::CloseStream(int channelId)
 
 	EnterCriticalSection(&crit);
 
-	//关闭rtsp client
+	//关闭rtmp client
 	EasyRTMPClient_Release(pRealtimePlayThread[iNvsIdx].nvsHandle);
 	//关闭播放线程
 	ClosePlayThread(&pRealtimePlayThread[iNvsIdx]);
