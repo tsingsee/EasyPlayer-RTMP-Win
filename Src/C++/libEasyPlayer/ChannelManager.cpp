@@ -1280,7 +1280,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 
 						memset(audio_buf, 0x00, audbuf_len);
 						int pcm_data_size = 0;
-						int ret = FFD_DecodeAudio(pDecoderObj->ffDecoder, (char*)pDecBuffer+7, nDecBufLen-7, (char *)audio_buf, &pcm_data_size);	//音频解码(支持g711(ulaw)和AAC)
+						int ret = FFD_DecodeAudio(pDecoderObj->ffDecoder, (char*)pDecBuffer, nDecBufLen, (char *)audio_buf, &pcm_data_size);	//音频解码(支持g711(ulaw)和AAC)
 						if (ret == 0)
 						{
 							//播放
@@ -2322,6 +2322,58 @@ int __RTMPSourceCallBack( int _channelId, void *_channelPtr, int _frameType, cha
 
 	return 0;
 }
+
+/* RTMPClient数据回调 */
+//int __RTMPSourceCallBack( int _channelId, void *_channelPtr, int _frameType, char *pBuf, EASY_FRAME_INFO* _frameInfo)
+//{
+//	if (_frameType == EASY_SDK_VIDEO_FRAME_FLAG)//回调视频数据，包含00 00 00 01头
+//	{
+//		if (_frameInfo->codec == EASY_SDK_VIDEO_CODEC_H264)
+//		{
+//			/*
+//			每一个I关键帧都是SPS+PPS+IDR的组合
+//			|---------------------|----------------|-------------------------------------|
+//			|                     |                |                                     |
+//			0-----------------reserved1--------reserved2-------------------------------length
+//			*/
+//			if (_frameInfo->type == EASY_SDK_VIDEO_FRAME_I)
+//			{
+//				_TRACE("Get I H264(%d * %d) IDR Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
+//			}
+//			else if (_frameInfo->type == EASY_SDK_VIDEO_FRAME_P)
+//			{
+//				_TRACE("Get P H264(%d * %d) Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
+//			}
+//		}
+//		else if (_frameInfo->codec == EASY_SDK_VIDEO_CODEC_H265)
+//		{
+//			_TRACE("Get H265(%d * %d) Len:%d \ttimestamp:%u.%u\n", _frameInfo->width, _frameInfo->height, _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
+//		}
+//	}
+//	else if (_frameType == EASY_SDK_AUDIO_FRAME_FLAG)//回调音频数据
+//	{
+//		if (_frameInfo->codec == EASY_SDK_AUDIO_CODEC_AAC)
+//		{
+//			_TRACE("Get AAC Len:%d \ttimestamp:%u.%u\n", _frameInfo->length, _frameInfo->timestamp_sec, _frameInfo->timestamp_usec);
+//		}
+//	}
+//	else if (_frameType == EASY_SDK_EVENT_FRAME_FLAG)//回调连接状态事件
+//	{
+//
+//	}
+//	else if (_frameType == EASY_SDK_MEDIA_INFO_FLAG)//回调出媒体信息
+//	{
+//		if (pBuf != NULL)
+//		{
+//			EASY_MEDIA_INFO_T mediainfo;
+//			memset(&mediainfo, 0x00, sizeof(EASY_MEDIA_INFO_T));
+//			memcpy(&mediainfo, pBuf, sizeof(EASY_MEDIA_INFO_T));
+//			_TRACE("RTSP DESCRIBE Get Media Info: video:%u fps:%u audio:%u channel:%u sampleRate:%u \n",
+//				mediainfo.u32VideoCodec, mediainfo.u32VideoFps, mediainfo.u32AudioCodec, mediainfo.u32AudioChannel, mediainfo.u32AudioSamplerate);
+//		}
+//	}
+//	return 0;
+//}
 
 int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAME_INFO *frameinfo)
 {
