@@ -115,13 +115,11 @@ typedef struct __EASY_MEDIA_INFO_T
 {
 	Easy_U32 u32VideoCodec;				/* 视频编码类型 */
 	Easy_U32 u32VideoFps;				/* 视频帧率 */
-	Easy_U32 u32VideoQueueSize;			/* 视频缓存大小	*/
 
 	Easy_U32 u32AudioCodec;				/* 音频编码类型 */
 	Easy_U32 u32AudioSamplerate;		/* 音频采样率 */
 	Easy_U32 u32AudioChannel;			/* 音频通道数 */
 	Easy_U32 u32AudioBitsPerSample;		/* 音频采样精度 */
-	Easy_U32 u32AudioQueueSize;			/* 音频缓存大小	*/
 
 	Easy_U32 u32VpsLength;
 	Easy_U32 u32SpsLength;
@@ -134,7 +132,7 @@ typedef struct __EASY_MEDIA_INFO_T
 }EASY_MEDIA_INFO_T;
 
 /* 帧信息 */
-typedef struct tagEASY_FRAME_INFO
+typedef struct 
 {
 	unsigned int	codec;				/* 音视频格式 */
 
@@ -157,6 +155,5 @@ typedef struct tagEASY_FRAME_INFO
 	float			bitrate;			/* 比特率 */
 	float			losspacket;			/* 丢包率 */
 }EASY_FRAME_INFO;
-
 
 #endif
