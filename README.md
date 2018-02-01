@@ -28,7 +28,7 @@ Windows：vs2010编译；
 
 ## DEMO效果 ##
 
-![EasyPlayer-RTMP Windows](http://www.easydarwin.org/github/images/easyplayerrtmp/EasyPlayerRTMPWin20180101.png)
+![EasyPlayer-RTMP Windows](http://www.easydarwin.org/github/images/easyplayerrtmp/EasyPlayerRTMPWin20180102.png)
 
 
 ## EasyPlayer项目集群说明 ##
