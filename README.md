@@ -1,6 +1,6 @@
 # EasyPlayer-RTMP-Win #
 
-EasyPlayer **RTMP Windows** 播放器是由[紫鲸团队](http://www.pvale.com "紫鲸云")开发和维护的一个RTMP协议专版流媒体播放器项目，对RTMP能实现超低延时播放。目前支持**Windows**、**Android**平台，**iOS**平台，支持**多窗口**。视频支持**H.264**，音频支持**AAC**。
+EasyPlayer **RTMP Windows** 播放器是由[紫鲸团队](http://www.pvale.com "紫鲸云")开发和维护的一个RTMP协议专版流媒体播放器项目，对RTMP能实现超低延时播放。目前支持**Windows**、**Android**平台，**iOS**平台，支持**多窗口**。视频支持**H.264**(可扩展H.265)，音频支持**AAC**。
 
 ## 代码及编译方法 ##
 Windows：vs2010编译；
@@ -28,11 +28,8 @@ Windows：vs2010编译；
 
 ## DEMO效果 ##
 
-![EasyPlayer-RTMP Windows](http://www.easydarwin.org/github/images/easyplayerrtmp/EasyPlayerRTMPWin.png)
+![EasyPlayer-RTMP Windows](http://www.easydarwin.org/github/images/easyplayerrtmp/EasyPlayerRTMPWin20180101.png)
 
-
-## WIKI 文档 ##
-- [libEasyPlayer RTMP播放器库API接口说明](https://github.com/EasyDSS/EasyPlayer-RTSP-Win/wiki/libEasyPlayer-RTSP%E6%92%AD%E6%94%BE%E5%99%A8%E5%BA%93API%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E)
 
 ## EasyPlayer项目集群说明 ##
 
