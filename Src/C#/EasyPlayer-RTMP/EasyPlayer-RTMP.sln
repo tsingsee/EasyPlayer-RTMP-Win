@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPlayer-RTMP.Client", "EasyPlayer-RTMP\EasyPlayer-RTMP.Client.csproj", "{2D9465D7-86C8-42D0-A26B-AB561869F58C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{494DAB3E-B681-48E1-9B87-6075913C7140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{03E89D2B-ED96-4A28-9E54-CF5226BA9C50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{324E7FF1-7353-48C5-B803-4618C9A4FC7B}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Lib\avcodec-57.dll = Solution Items\Lib\avcodec-57.dll
+		Solution Items\Lib\avdevice-57.dll = Solution Items\Lib\avdevice-57.dll
+		Solution Items\Lib\avfilter-6.dll = Solution Items\Lib\avfilter-6.dll
+		Solution Items\Lib\avformat-57.dll = Solution Items\Lib\avformat-57.dll
+		Solution Items\Lib\avutil-55.dll = Solution Items\Lib\avutil-55.dll
+		Solution Items\Lib\D3DRender.dll = Solution Items\Lib\D3DRender.dll
+		Solution Items\Lib\D3DX9_43.dll = Solution Items\Lib\D3DX9_43.dll
+		Solution Items\Lib\dxva2.dll = Solution Items\Lib\dxva2.dll
+		Solution Items\Lib\FFDecoder.dll = Solution Items\Lib\FFDecoder.dll
+		Solution Items\Lib\ImageOle.dll = Solution Items\Lib\ImageOle.dll
+		Solution Items\Lib\IntelHardCodec.dll = Solution Items\Lib\IntelHardCodec.dll
+		Solution Items\Lib\libEasyPlayer-RTMP.dll = Solution Items\Lib\libEasyPlayer-RTMP.dll
+		Solution Items\Lib\libEasyRTMPClient.dll = Solution Items\Lib\libEasyRTMPClient.dll
+		Solution Items\Lib\libEasyRTSPClient.dll = Solution Items\Lib\libEasyRTSPClient.dll
+		Solution Items\Lib\libgcc_s_sjlj-1.dll = Solution Items\Lib\libgcc_s_sjlj-1.dll
+		Solution Items\Lib\libgpac.dll = Solution Items\Lib\libgpac.dll
+		Solution Items\Lib\libmfxsw32.dll = Solution Items\Lib\libmfxsw32.dll
+		Solution Items\Lib\libstdc++-6.dll = Solution Items\Lib\libstdc++-6.dll
+		Solution Items\Lib\msvcp100.dll = Solution Items\Lib\msvcp100.dll
+		Solution Items\Lib\msvcp100d.dll = Solution Items\Lib\msvcp100d.dll
+		Solution Items\Lib\msvcr100.dll = Solution Items\Lib\msvcr100.dll
+		Solution Items\Lib\msvcr100d.dll = Solution Items\Lib\msvcr100d.dll
+		Solution Items\Lib\swresample-2.dll = Solution Items\Lib\swresample-2.dll
+		Solution Items\Lib\swscale-4.dll = Solution Items\Lib\swscale-4.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPlayer-RTMP.NetSDK", "EasyPlayer-RTMP.NetSDK\EasyPlayer-RTMP.NetSDK.csproj", "{F68B59FE-CE98-4451-96AB-81851C17F0DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D9465D7-86C8-42D0-A26B-AB561869F58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9465D7-86C8-42D0-A26B-AB561869F58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D9465D7-86C8-42D0-A26B-AB561869F58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D9465D7-86C8-42D0-A26B-AB561869F58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68B59FE-CE98-4451-96AB-81851C17F0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68B59FE-CE98-4451-96AB-81851C17F0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68B59FE-CE98-4451-96AB-81851C17F0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68B59FE-CE98-4451-96AB-81851C17F0DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03E89D2B-ED96-4A28-9E54-CF5226BA9C50} = {494DAB3E-B681-48E1-9B87-6075913C7140}
+		{324E7FF1-7353-48C5-B803-4618C9A4FC7B} = {494DAB3E-B681-48E1-9B87-6075913C7140}
+	EndGlobalSection
+EndGlobal
