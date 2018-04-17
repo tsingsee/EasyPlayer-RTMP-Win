@@ -156,7 +156,7 @@ namespace EasyPlayer_RTMP.NetSDK
         public static extern int EasyPlayer_OpenStream(string url, IntPtr hWnd, RENDER_FORMAT renderFormat, int rtpovertcp, string username, string password, MediaSourceCallBack callback, IntPtr userPtr, bool bHardDecode = true);
 
         /// <summary>
-        /// Easies the player_ close stream.
+        /// 停止取流.
         /// </summary>
         /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
         /// <returns>System.Int32.</returns>
@@ -180,40 +180,6 @@ namespace EasyPlayer_RTMP.NetSDK
         /// <returns>System.Int32.</returns>
         [DllImport(@"Lib\libEasyPlayer-RTMP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?EasyPlayer_SetShownToScale@@YAHHH@Z")]
         public static extern int EasyPlayer_SetShownToScale(int channelId, int shownToScale);
-
-        /// <summary>
-        /// 设置解码类型
-        /// </summary>
-        /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值</param>
-        /// <param name="decodeKeyframeOnly">0=所有帧解码，1=只解码关键帧.</param>
-        /// <returns>System.Int32.</returns>
-        [DllImport(@"Lib\libEasyPlayer-RTMP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?EasyPlayer_SetDecodeType@@YAHHH@Z")]
-        public static extern int EasyPlayer_SetDecodeType(int channelId, int decodeKeyframeOnly);
-
-        /// <summary>
-        /// 设置视频显示时渲染区域.
-        /// </summary>
-        /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
-        /// <param name="lpSrcRect">设置渲染区域的矩形结构体.</param>
-        /// <returns>System.Int32.</returns>
-        public static int EasyPlayer_SetRenderRect(int channelId, Rect lpSrcRect)
-        {
-            tagRECT rect = new tagRECT { left = (int)lpSrcRect.X, bottom = (int)lpSrcRect.Height, right = (int)lpSrcRect.Width, top = (int)lpSrcRect.Y };
-            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(rect));
-            Marshal.StructureToPtr(rect, ptr, true);
-            int ret = EasyPlayer_SetRenderRect(channelId, ptr);
-            Marshal.FreeHGlobal(ptr);
-            return 0;
-        }
-
-        /// <summary>
-        /// 设置视频显示时渲染区域.
-        /// </summary>
-        /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
-        /// <param name="lpSrcRect">设置渲染区域的矩形结构体.</param>
-        /// <returns>System.Int32.</returns>
-        [DllImport(@"Lib\libEasyPlayer-RTMP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?EasyPlayer_SetRenderRect@@YAHHPAUtagRECT@@@Z")]
-        private static extern int EasyPlayer_SetRenderRect(int channelId, IntPtr lpSrcRect);
 
         /// <summary>
         /// 设置是否显示码流信息.
@@ -261,7 +227,7 @@ namespace EasyPlayer_RTMP.NetSDK
         }
 
         /// <summary>
-        /// Easies the player_ set manu pic shot path.
+        /// 設置截圖的路徑.
         /// </summary>
         /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
         /// <param name="shotPath">The shot path.</param>
@@ -278,7 +244,7 @@ namespace EasyPlayer_RTMP.NetSDK
         private static extern int EasyPlayer_StartManuPicShot(int channelId);
 
         /// <summary>
-        /// Easies the player_ stop manu pic shot.
+        /// 停止截圖.
         /// </summary>
         /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
         /// <returns>System.Int32.</returns>
@@ -312,7 +278,7 @@ namespace EasyPlayer_RTMP.NetSDK
         private static extern int EasyPlayer_StartManuRecording(int channelId);
 
         /// <summary>
-        /// Easies the player_ set manu record path.
+        /// 設置視頻錄製路徑.
         /// </summary>
         /// <param name="channelId">通道ID，EasyPlayer_OpenStream函数返回值.</param>
         /// <param name="recordPath">The record path.</param>
