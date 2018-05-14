@@ -43,7 +43,7 @@ typedef struct tagEASY_PALYER_OSD
 
 typedef int (CALLBACK *MediaSourceCallBack)( int _channelId, int *_channelPtr, int _frameType, char *pBuf, EASY_FRAME_INFO* _frameInfo);
 
-LIB_EASYPLAYER_API int EasyPlayer_Init();
+LIB_EASYPLAYER_API int EasyPlayer_Init(char* key);
 LIB_EASYPLAYER_API void EasyPlayer_Release();
 
 LIB_EASYPLAYER_API int EasyPlayer_OpenStream(const char *url, HWND hWnd, RENDER_FORMAT renderFormat, 
