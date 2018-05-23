@@ -19,7 +19,7 @@ CDlgRender::CDlgRender(CWnd* pParent /*=NULL*/)
 	hMenu		=	NULL;
 
 	m_pEasyLogo = NULL;
-	channelStatus.showOSD = 1;
+	channelStatus.showOSD = 0;
 	mChannelId	=	0;
 }
 

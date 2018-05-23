@@ -359,7 +359,7 @@ void CDlgVideo::OnBnClickedButtonPreview()
 			osd.shadowcolor = RGB(0,0,0);
 			char* ss =  "这是EasyPlayer-RTMP-Win播放器 \r\n的字幕叠加接口的效果！！！\r\n以\"\\r\\n\"为换行结束符号\r\n注意：每行的长度不能超过128个字节\r\n总的OSD长度不能超过1024个字节";
 			strcpy(osd.stOSD ,ss);
-			EasyPlayer_ShowOSD(m_ChannelId, 1,  osd);
+			EasyPlayer_ShowOSD(m_ChannelId, 0,  osd);
 #endif
 			CString strFilePath = GET_MODULE_FILE_INFO.strPath;
 			char sFilePath[MAX_PATH];
