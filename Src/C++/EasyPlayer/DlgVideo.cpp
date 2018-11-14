@@ -195,7 +195,7 @@ void	CDlgVideo::CreateComponents()
 	__CREATE_WINDOW(pChkRTPTransMode	,	CButton,	IDC_CHECK_RTPTRANSMODE);
 	__CREATE_WINDOW(pChkDecodeMode	,	CButton,	IDC_CHECK_DECODEMODE);
 	
-	if (NULL != pEdtURL)		pEdtURL->SetWindowText(TEXT("rtmp://live.hkstv.hk.lxdns.com/live/hks"));
+	if (NULL != pEdtURL)		pEdtURL->SetWindowText(TEXT("rtmp://202.69.69.180:443/webcast/bshdlive-pc"));
 // 	if (NULL != pEdtUsername)	pEdtUsername->SetWindowText(TEXT("admin"));
 // 	if (NULL != pEdtPassword)	pEdtPassword->SetWindowText(TEXT("admin"));
 	if (NULL != pSliderCache)	pSliderCache->SetRange(1, 10);

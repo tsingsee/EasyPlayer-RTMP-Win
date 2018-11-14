@@ -146,7 +146,7 @@
             this.StreamURI.Name = "StreamURI";
             this.StreamURI.Size = new System.Drawing.Size(312, 26);
             this.StreamURI.TabIndex = 11;
-            this.StreamURI.Text = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+            this.StreamURI.Text = "rtmp://202.69.69.180:443/webcast/bshdlive-pc";
             // 
             // CacheFream
             // 
