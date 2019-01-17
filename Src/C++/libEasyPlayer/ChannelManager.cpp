@@ -2390,6 +2390,40 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 
 	if (mediatype == EASY_SDK_VIDEO_FRAME_FLAG)
 	{
+		//bitrate码率统计
+		unsigned int uiCurrentTime = (unsigned int)time(NULL);
+		if (pRealtimePlayThread[_chid].bitrateTotalTime == 0)	
+			pRealtimePlayThread[_chid].bitrateTotalTime = uiCurrentTime;
+		else
+		{
+			if (pRealtimePlayThread[_chid].bitrateTotalTime == uiCurrentTime)
+			{
+				pRealtimePlayThread[_chid].bitrateTotal += media_frameInfo.length;
+			}
+			else
+			{
+				pRealtimePlayThread[_chid].bitrate = pRealtimePlayThread[_chid].bitrateTotal;
+				pRealtimePlayThread[_chid].bitrateTotal =  media_frameInfo.length;
+
+				pRealtimePlayThread[_chid].bitrateTotalTime = uiCurrentTime;
+			}
+		}
+		//帧率统计
+		//计算解码帧率
+		unsigned int uiTime = (unsigned int)time(NULL);
+		if (uiTime == pRealtimePlayThread[_chid].uiTimestampTotalFps)	pRealtimePlayThread[_chid].decodeFpsTotal++;
+		else
+		{
+			pRealtimePlayThread[_chid].uiTimestampTotalFps = uiTime;
+
+			pRealtimePlayThread[_chid].fps = pRealtimePlayThread[_chid].decodeFpsTotal;
+
+			//_TRACE(TRACE_LOG_DEBUG, (char *)"解码帧率: %d\n", pMediaChannel->mediaDecoder.decodeFPS);
+			pRealtimePlayThread[_chid].decodeFpsTotal = 1;
+		}
+		media_frameInfo.fps = pRealtimePlayThread[_chid].fps;
+		media_frameInfo.bitrate = pRealtimePlayThread[_chid].bitrate* 8.0f / 1024.0f;
+
 		if (frameinfo->type==EASY_SDK_VIDEO_FRAME_I/*Key frame*/) 
 		{
 			m_bIFrameArrive = true;
@@ -2412,6 +2446,7 @@ int	CChannelManager::ProcessData(int _chid, int mediatype, char *pbuf, EASY_FRAM
 		{
 			SSQ_AddData(pRealtimePlayThread[_chid].pAVQueue, _chid, MEDIA_TYPE_VIDEO, (EASY_FRAME_INFO*)&media_frameInfo, pbuf);
 		}
+
 	}
 	else if (mediatype == EASY_SDK_AUDIO_FRAME_FLAG)
 	{

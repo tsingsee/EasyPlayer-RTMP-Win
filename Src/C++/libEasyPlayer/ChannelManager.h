@@ -190,6 +190,13 @@ typedef struct __PLAY_THREAD_OBJ
 	SS_QUEUE_OBJ_T	*pRecAVQueue;		//接收rtsp的帧队列
 	CRITICAL_SECTION	critRecQueue;	
 
+	unsigned int bitrateTotalTime;
+	unsigned int bitrateTotal;
+	unsigned int bitrate;
+	unsigned int	uiTimestampTotalFps ;
+	int		decodeFpsTotal;
+	int fps;
+
 }PLAY_THREAD_OBJ;
 
 
