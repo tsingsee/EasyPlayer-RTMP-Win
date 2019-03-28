@@ -639,9 +639,9 @@ DECODER_OBJ	*GetDecoder(PLAY_THREAD_OBJ	*_pPlayThread, unsigned int mediaType, E
 		{
 			if (_frameinfo->width < 1 || _frameinfo->height<1 || _frameinfo->codec<1)		return NULL;
 
-			if (_pPlayThread->decoderObj[i].codec.vidCodec == 0x00 &&
-				_pPlayThread->decoderObj[i].codec.width == 0x00 &&
-				_pPlayThread->decoderObj[i].codec.height== 0x00 && iIdx==-1)
+			if (_pPlayThread->decoderObj[i].codec.vidCodec != _frameinfo->codec ||
+				_pPlayThread->decoderObj[i].codec.width != _frameinfo->width ||
+				_pPlayThread->decoderObj[i].codec.height != _frameinfo->height && iIdx==-1)
 			{
 				iIdx = i;
 			}
@@ -2080,7 +2080,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 		else							iDropFrame = 0;
 		if (iDropFrame < 0x02)
 		{
-#if 1
+#if 0
 			// 解码数据显示+回调  [12/13/2017 Dingshuai]
 			//pRealtimePlayThread[iNvsIdx].pCallback = callback;
 			if (pThread&&pThread->pCallback&&iDispalyYuvIdx>=0)

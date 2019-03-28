@@ -286,6 +286,7 @@ void	CEasyPlayerDlg::CreateComponents()
 		pComboxRenderFormat->AddString(TEXT("YUY2"));
 		pComboxRenderFormat->AddString(TEXT("YV12"));
 		pComboxRenderFormat->AddString(TEXT("RGB565"));
+		pComboxRenderFormat->AddString(TEXT("RGB888"));
 		pComboxRenderFormat->AddString(TEXT("GDI"));
 
 		pComboxRenderFormat->SetCurSel(3);
@@ -576,7 +577,8 @@ void CEasyPlayerDlg::OnCbnSelchangeComboRenderFormat()
 	if (iIdx == 0)	RenderFormat	=	DISPLAY_FORMAT_YUY2;//YUY2
 	else if (iIdx == 1)	RenderFormat	=	DISPLAY_FORMAT_YV12;//YV12
 	else if (iIdx == 2)	RenderFormat	=	DISPLAY_FORMAT_RGB565;//RGB565
-	else if (iIdx == 3)	RenderFormat	=	DISPLAY_FORMAT_RGB24_GDI;//GDI
+	else if (iIdx == 3)	RenderFormat	=	DISPLAY_FORMAT_A8R8G8B8;//RGB888
+	else if (iIdx == 4)	RenderFormat	=	DISPLAY_FORMAT_RGB24_GDI;//GDI
 }
 
 void CEasyPlayerDlg::OnBnClickedCheckShowntoscale()
