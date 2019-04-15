@@ -37,8 +37,8 @@ LIB_EASYPLAYER_API int EasyPlayer_Init(char* key)
 		break;
 	}
 
-	if(EASY_ACTIVATE_SUCCESS != isEasyRTSPClientActivated)
-		return -1;
+	if(isEasyRTSPClientActivated <= 0)
+		return isEasyRTSPClientActivated;
 
 	if (NULL == g_pChannelManager)
 	{
@@ -48,7 +48,7 @@ LIB_EASYPLAYER_API int EasyPlayer_Init(char* key)
 
 	if (NULL == g_pChannelManager)		return -1;
 
-	return 0;
+	return isEasyRTSPClientActivated;
 }
 
 // Release

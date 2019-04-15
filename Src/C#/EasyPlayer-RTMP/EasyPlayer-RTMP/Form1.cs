@@ -69,7 +69,8 @@ namespace EasyPlayer_RTMP
 
         private void PlayerForm_Load(object sender, EventArgs e)
         {
-            if (PlayerSdk.EasyPlayer_Init() == 0)
+            int nit = PlayerSdk.EasyPlayer_Init();
+            if (nit > 0)
                 isInit = true;
             callBack = new PlayerSdk.MediaSourceCallBack(MediaCallback);
             this.DecodeType.SelectedItem = "GDI";

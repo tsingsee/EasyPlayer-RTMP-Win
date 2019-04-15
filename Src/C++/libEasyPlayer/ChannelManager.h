@@ -136,7 +136,7 @@ typedef struct __PLAY_THREAD_OBJ
 	THREAD_OBJ		displayThread;			//显示线程
 	THREAD_OBJ		recordThread;			//录像线程
 	// 
-	Easy_RTSP_Handle		nvsHandle;
+	Easy_Handle		nvsHandle;
 	HWND			hWnd;				//显示视频的窗口句柄
 	int				channelId;			//通道号
 	int				showStatisticalInfo;//显示统计信息

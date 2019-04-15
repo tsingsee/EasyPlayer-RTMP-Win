@@ -9,6 +9,7 @@
 
 #include "EasyTypes.h"
 
+#define	RTMP_PROG_NAME	"libEasyRTMPClient v3.0.19.0415"
 
 enum ErrorType
 {
@@ -32,24 +33,20 @@ enum ErrorType
     RTMP_PARSE_FAILED = -118
 };
 
-#define Easy_RTMP_Handle void*
-
-
 enum MediaType
 {
 	e_MediaType_None = 0,
 	e_MediaType_raw,
-	e_MediaType_Avc,//h264 video
-	e_MediaType_Aac,//aac audio
+	e_MediaType_Avc,	//Video
+	e_MediaType_Aac,	//Audio
 	e_MediaType_script,
 	e_MediaType_Pcm,
-	e_MediaType_Flv //flv tag
+	e_MediaType_Flv		//flv tag
 };
 
 typedef struct __EasyRTMPClientParams_T{
     bool reconnect; //whether reconnet
 }EasyRTMPClientParams;
-
 
 typedef int (*EasyRTMPClientCallBack)(int _channelId, void* _channelPtr, int _frameType, char *pBuf, EASY_FRAME_INFO* _frameInfo);
 
@@ -57,21 +54,26 @@ typedef int (*EasyRTMPClientCallBack)(int _channelId, void* _channelPtr, int _fr
 extern "C"
 {
 #endif
+	/* Active SDK */
 #ifdef ANDROID
 	Easy_API Easy_I32 EasyRTMPClient_Activate(char *license, char* userPtr);
 #else
 	Easy_API Easy_I32 EasyRTMPClient_Activate(char *license);
 #endif
 
-	Easy_API Easy_RTMP_Handle EasyRTMPClient_Create();
+	/* Create Instance */
+	Easy_API Easy_Handle EasyRTMPClient_Create();
 
-	Easy_API int EasyRTMPClient_Release(Easy_RTMP_Handle handle);
+	/* Release Instance */
+	Easy_API int EasyRTMPClient_Release(Easy_Handle handle);
 
-	Easy_API int EasyRTMPClient_SetCallback(Easy_RTMP_Handle handle, EasyRTMPClientCallBack _callback);
+	/* Set Event&Data Callback */
+	Easy_API int EasyRTMPClient_SetCallback(Easy_Handle handle, EasyRTMPClientCallBack _callback);
 
-    Easy_API int EasyRTMPClient_SetParams(Easy_RTMP_Handle handle, EasyRTMPClientParams* param);
+    Easy_API int EasyRTMPClient_SetParams(Easy_Handle handle, EasyRTMPClientParams* param);
 
-	Easy_API int EasyRTMPClient_StartStream(Easy_RTMP_Handle handle, int _channelid, const char* _url, void* _channelPtr);
+	/* Start Streaming */
+	Easy_API int EasyRTMPClient_StartStream(Easy_Handle handle, int _channelid, const char* _url, void* _channelPtr);
 #ifdef __cplusplus
 }
 #endif
