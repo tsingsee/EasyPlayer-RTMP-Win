@@ -37,6 +37,10 @@ namespace EasyPlayer_RTMP
         /// <returns>System.Int32.</returns>
         private int MediaCallback(int _channelId, IntPtr _channelPtr, int _frameType, IntPtr pBuf, ref PlayerSdk.EASY_FRAME_INFO _frameInfo)
         {
+            if(1 == _frameType)
+            {
+               //get _frameInfo.width and _frameInfo.height;
+            }
             return 0;
         }
 

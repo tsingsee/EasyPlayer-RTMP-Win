@@ -1159,7 +1159,8 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 					memcpy(&pThread->yuvFrame[pThread->decodeYuvIdx].frameinfo, &frameinfo, sizeof(EASY_FRAME_INFO));
 
 					pThread->decodeYuvIdx ++;
-					if (pThread->decodeYuvIdx >= MAX_YUV_FRAME_NUM)		pThread->decodeYuvIdx = 0;
+					if (pThread->decodeYuvIdx >= MAX_YUV_FRAME_NUM)		
+						pThread->decodeYuvIdx = 0;
 
 					//抓图
 					if (pThread->manuScreenshot == 0x01 )//Just support jpg，png
@@ -2080,7 +2081,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 		else							iDropFrame = 0;
 		if (iDropFrame < 0x02)
 		{
-#if 0
+#if 1
 			// 解码数据显示+回调  [12/13/2017 Dingshuai]
 			//pRealtimePlayThread[iNvsIdx].pCallback = callback;
 			if (pThread&&pThread->pCallback&&iDispalyYuvIdx>=0)
@@ -2150,7 +2151,7 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDisplayThread( LPVOID _pParam )
 				//int nYuvFrameLen = pThread->yuvFrame[iDispalyYuvIdx].Yuvsize-1;
 				lastFrameInfo.length =  pThread->yuvFrame[iDispalyYuvIdx].Yuvsize-1;
 
-				//pThread->pCallback(pThread->channelId, (INT*)pThread->pUserPtr, EASY_SDK_DECODE_VIDEO_FLAG,  m_RGB24 , (EASY_FRAME_INFO*)(&lastFrameInfo));
+				pThread->pCallback(pThread->channelId, (INT*)pThread->pUserPtr, EASY_SDK_DECODE_VIDEO_FLAG,  m_RGB24 , (EASY_FRAME_INFO*)(&lastFrameInfo));
 			}
 #endif
 

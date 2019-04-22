@@ -94,6 +94,8 @@ typedef enum __EASY_ACTIVATE_ERR_CODE_ENUM
 #define EASY_SDK_SDP_FRAME_FLAG		0x00000010		/* SDP帧标志 */
 #define EASY_SDK_MEDIA_INFO_FLAG	0x00000020		/* 媒体类型标志*/
 
+#define EASY_SDK_DECODE_VIDEO_FLAG 0x00000040 
+
 /* 视频关键字标识 */
 #define EASY_SDK_VIDEO_FRAME_I		0x01		/* I帧 */
 #define EASY_SDK_VIDEO_FRAME_P		0x02		/* P帧 */

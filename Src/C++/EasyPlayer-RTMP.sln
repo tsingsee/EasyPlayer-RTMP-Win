@@ -8,6 +8,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasyPlayer-RTMP", "EasyPlay
 		{BC0300E0-E5D5-4A49-88B4-4E79DFF5F1CC} = {BC0300E0-E5D5-4A49-88B4-4E79DFF5F1CC}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libEasyRTMPClient", "libEasyRTMPClient\libEasyRTMPClient\libEasyRTMPClient.vcxproj", "{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -28,6 +30,14 @@ Global
 		{4890B410-FE84-4408-8D42-4B79BCA92552}.Release|Win32.ActiveCfg = Release|Win32
 		{4890B410-FE84-4408-8D42-4B79BCA92552}.Release|Win32.Build.0 = Release|Win32
 		{4890B410-FE84-4408-8D42-4B79BCA92552}.Release|x64.ActiveCfg = Release|Win32
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Debug|Win32.Build.0 = Debug|Win32
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Debug|x64.ActiveCfg = Debug|x64
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Debug|x64.Build.0 = Debug|x64
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Release|Win32.ActiveCfg = Release|Win32
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Release|Win32.Build.0 = Release|Win32
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Release|x64.ActiveCfg = Release|x64
+		{A6720E99-1C0E-49AC-A249-A2D16EB8E13A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
