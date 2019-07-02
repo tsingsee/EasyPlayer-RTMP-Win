@@ -130,7 +130,7 @@ namespace EasyPlayer_RTMP.NetSDK
         /// </summary>
         /// <returns>System.Int32.</returns>
         [DllImport(@"Lib\libEasyPlayer-RTMP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?EasyPlayer_Init@@YAHPAD@Z")]
-        public static extern int EasyPlayer_Init(string key= "59615A67426F69576B5A7541725370636F395652792B784659584E3555477868655756794C564A55545641755A58686C567778576F50394C2F69426C59584E35");
+        public static extern int EasyPlayer_Init(string key= "59615A67426F69576B5A734154526C646F7561797065784659584E3555477868655756794C564A55545641755A58686C567778576F502B6C2F69426C59584E35");
 
         /// <summary>
         /// 资源释放.
