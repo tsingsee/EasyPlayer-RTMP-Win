@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using static EasyPlayer_RTMP.NetSDK.PlayerSdk;
 
 namespace EasyPlayer_RTMP
 {
@@ -222,14 +221,14 @@ namespace EasyPlayer_RTMP
             var rect = new Rect { X = 10, Y = 10, Width = panel1.Width, Height = panel1.Height };
             var panelSize = this.panel1.ClientSize;
 
-            EASY_PALYER_OSD fontInfo = new EASY_PALYER_OSD
+            EasyPlayer_RTMP.NetSDK.PlayerSdk.EASY_PALYER_OSD fontInfo = new EasyPlayer_RTMP.NetSDK.PlayerSdk.EASY_PALYER_OSD
             {
                 alpha = 255,
                 size = 35,
                 color = (uint)ToArgb(Color.Red),
                 shadowcolor = (uint)ToArgb(Color.Black),
                 stOSD = "这是EasyPlayer-RTMP-Win播放器 \r\n的字幕叠加接口的效果！！！\r\n以\"\\r\\n\"为换行结束符号\r\n注意：每行的长度不能超过128个字节\r\n总的OSD长度不能超过1024个字节",
-                rect = new tagRECT { left = (int)rect.X, top = (int)rect.Y, right = (int)rect.Width, bottom = (int)rect.Height }
+                rect = new EasyPlayer_RTMP.NetSDK.PlayerSdk.tagRECT { left = (int)rect.X, top = (int)rect.Y, right = (int)rect.Width, bottom = (int)rect.Height }
             };
 
             var checkState = (sender as ToolStripMenuItem).CheckState;
