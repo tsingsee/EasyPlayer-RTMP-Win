@@ -1,6 +1,6 @@
 # EasyPlayer-RTMP-Win #
 
-EasyPlayer **RTMP Windows** 播放器是由[TSINGSEE青犀开放平台](http://www.tsingsee.com "TSINGSEE青犀云")开发和维护的一个RTMP协议专版流媒体播放器项目，对RTMP能实现超低延时播放。目前支持**Windows**、**Android**平台，**iOS**平台，支持**多窗口**。视频支持**H.264**(可扩展H.265)，音频支持**AAC**。
+EasyPlayer **RTMP Windows** 播放器是由[TSINGSEE青犀开放平台](http://www.tsingsee.com "TSINGSEE青犀云")开发和维护的一个RTMP协议专版流媒体播放器项目，对RTMP能实现超低延时播放。目前支持**Windows**、**Android**平台，**iOS**平台，支持**多窗口**。视频支持**H.264、H.265**，音频支持**AAC**。
 
 ## 代码及编译方法 ##
 Windows：vs2010编译；
