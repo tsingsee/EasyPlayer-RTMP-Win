@@ -1008,7 +1008,11 @@ LPTHREAD_START_ROUTINE CChannelManager::_lpDecodeThread( LPVOID _pParam )
 				}
 				
 				char sFileName[512] = {0,};
-				sprintf(sFileName, "%sch%d_%s.mp4", pThread->manuRecordingPath, pThread->channelId, szTime);
+				std::string strRecordPath=pThread->manuRecordingPath;
+				strRecordPath+="Record\\ch";
+
+				sprintf(sFileName, "%sch%d_%s.mp4",strRecordPath, pThread->channelId, szTime);
+				//sprintf(sFileName, "%sch%d_%s.mp4", pThread->manuRecordingPath, pThread->channelId, szTime);
 				 
 				if (!pThread->m_pMP4Writer->CreateMP4File(sFileName, ZOUTFILE_FLAG_FULL))
 				{
